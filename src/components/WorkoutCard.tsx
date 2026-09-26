@@ -1,25 +1,12 @@
+import { IWorkout } from "@/types/workout";
 import Image from "next/image";
 import Link from "next/link";
 
-interface WorkoutCardProps {
-  workout: {
-    id: number;
-    name: string;
-    image: string;
-    muscleGroups: string[];
-    equipment: string;
-    difficulty: string;
-    duration: number;
-    caloriesBurned: number;
-    sets: number;
-    reps: string;
-    rating: number;
-    description: string;
-    instructions: string[];
-  };
+interface IWorkoutCardProps {
+  workout: IWorkout;
 }
 
-const WorkoutCard = ({ workout }: WorkoutCardProps) => {
+const WorkoutCard = ({ workout }: IWorkoutCardProps) => {
   return (
     <Link
       href={`/workout/${workout.id}`}
