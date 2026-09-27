@@ -25,34 +25,23 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-  
+  const timer = window.setTimeout(() => {
     updateCounts();
+  }, 0);
 
-    
-    const handleFitlogStorage = () => {
-      updateCounts();
-    };
+  const handleFitlogStorage = () => {
+    updateCounts();
+  };
 
-    window.addEventListener(
-      "fitlog-storage",
-      handleFitlogStorage,
-    );
+  window.addEventListener("fitlog-storage", handleFitlogStorage);
+  window.addEventListener("storage", updateCounts);
 
-    
-    window.addEventListener("storage", updateCounts);
-
-    return () => {
-      window.removeEventListener(
-        "fitlog-storage",
-        handleFitlogStorage,
-      );
-
-      window.removeEventListener(
-        "storage",
-        updateCounts,
-      );
-    };
-  }, []);
+  return () => {
+    window.clearTimeout(timer);
+    window.removeEventListener("fitlog-storage", handleFitlogStorage);
+    window.removeEventListener("storage", updateCounts);
+  };
+}, []);
 
   return (
     <nav className="border-b border-[#252a32] bg-[#0e1014]">

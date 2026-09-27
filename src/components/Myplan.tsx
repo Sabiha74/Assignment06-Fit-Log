@@ -75,25 +75,22 @@ const MyPlan = () => {
     }
   };
 
-  useEffect(() => {
+ useEffect(() => {
+  const timer = window.setTimeout(() => {
     loadData();
+  }, 0);
 
-    const handleStorageUpdate = () => {
-      loadData();
-    };
+  const handleStorageUpdate = () => {
+    loadData();
+  };
 
-    window.addEventListener(
-      "fitlog-storage",
-      handleStorageUpdate,
-    );
+  window.addEventListener("fitlog-storage", handleStorageUpdate);
 
-    return () => {
-      window.removeEventListener(
-        "fitlog-storage",
-        handleStorageUpdate,
-      );
-    };
-  }, []);
+  return () => {
+    window.clearTimeout(timer);
+    window.removeEventListener("fitlog-storage", handleStorageUpdate);
+  };
+}, []);
 
     
   const handleRemoveFromPlan = (id: number) => {
