@@ -1,15 +1,66 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
+  const [planCount, setPlanCount] = useState(0);
+  const [savedCount, setSavedCount] = useState(0);
+
+  const updateCounts = () => {
+    const storedPlan = localStorage.getItem("fitlog-plan");
+    const storedSaved = localStorage.getItem("fitlog-saved");
+
+    const plan: number[] = storedPlan
+      ? JSON.parse(storedPlan)
+      : [];
+
+    const saved: number[] = storedSaved
+      ? JSON.parse(storedSaved)
+      : [];
+
+    setPlanCount(plan.length);
+    setSavedCount(saved.length);
+  };
+
+  useEffect(() => {
+  
+    updateCounts();
+
+    
+    const handleFitlogStorage = () => {
+      updateCounts();
+    };
+
+    window.addEventListener(
+      "fitlog-storage",
+      handleFitlogStorage,
+    );
+
+    
+    window.addEventListener("storage", updateCounts);
+
+    return () => {
+      window.removeEventListener(
+        "fitlog-storage",
+        handleFitlogStorage,
+      );
+
+      window.removeEventListener(
+        "storage",
+        updateCounts,
+      );
+    };
+  }, []);
+
   return (
     <nav className="border-b border-[#252a32] bg-[#0e1014]">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
 
         
         <div className="flex items-center gap-2">
-
-          
+        
           <div className="dropdown lg:hidden">
             <div
               tabIndex={0}
@@ -35,19 +86,22 @@ const Navbar = () => {
 
             <ul
               tabIndex={-1}
-              className="menu dropdown-content z-50 mt-3 w-44 rounded-lg text-[#ccff00] border border-[#252a32] bg-[#15181e] p-2 shadow-xl"
+              className="menu dropdown-content z-50 mt-3 w-44 rounded-lg border border-[#252a32] bg-[#15181e] p-2 shadow-xl"
             >
               <li>
                 <Link href="/">Workouts</Link>
               </li>
+
               <li>
                 <Link href="/my-plan">My Plan</Link>
               </li>
             </ul>
           </div>
 
-        
-          <Link href="/" className="flex items-center gap-2">
+          <Link
+            href="/"
+            className="flex items-center gap-2"
+          >
             <Image
               src="/logo.png"
               alt="FitLog Logo"
@@ -62,28 +116,26 @@ const Navbar = () => {
           </Link>
         </div>
 
-
+        
         <div className="absolute left-1/2 hidden -translate-x-1/2 lg:block">
           <div className="flex items-center gap-2 rounded-full bg-[#111419] p-1">
-
             <Link
               href="/"
-              className="rounded-full px-5 py-2 text-xs font-medium text-[#8b919b] transition hover:bg-[#ccff002a] hover:text-[#ccff00]"
+              className="rounded-full px-5 py-2 text-xs font-medium text-[#8b919b] transition hover:bg-[#ccff002b] hover:text-[#ccff00]"
             >
               Workouts
             </Link>
 
             <Link
               href="/my-plan"
-              className="rounded-full px-5 py-2 text-xs font-medium text-[#8b919b] transition hover:bg-[#ccff002a] hover:text-[#ccff00]"
+              className="rounded-full px-5 py-2 text-xs font-medium text-[#8b919b] transition hover:bg-[#ccff002b] hover:text-[#ccff00]"
             >
               My Plan
             </Link>
-
           </div>
         </div>
 
-        
+      
         <div className="flex items-center gap-3">
 
           
@@ -91,22 +143,26 @@ const Navbar = () => {
             href="/my-plan"
             className="flex items-center gap-2 text-xs text-[#8b919b] transition hover:text-white"
           >
-            <span className="hidden sm:inline">Plan</span>
+            <span className="hidden sm:inline">
+              Plan
+            </span>
 
             <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-[#ccff00] px-1.5 text-[10px] font-bold text-black">
-              0
+              {planCount}
             </span>
           </Link>
 
-         
+          
           <Link
             href="/my-plan"
             className="flex items-center gap-2 text-xs text-[#8b919b] transition hover:text-white"
           >
-            <span className="hidden sm:inline">Saved</span>
+            <span className="hidden sm:inline">
+              Saved
+            </span>
 
             <span className="flex h-5 min-w-5 items-center justify-center rounded-full border border-[#3a414c] px-1.5 text-[10px] font-medium text-[#d1d5db]">
-              0
+              {savedCount}
             </span>
           </Link>
 

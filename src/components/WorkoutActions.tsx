@@ -65,7 +65,7 @@ const WorkoutActions = ({ workout }: WorkoutActionsProps) => {
 
   return (
     <div className="mt-6 flex flex-wrap gap-3">
-      {/* Add to Today's Plan */}
+     
       <button
         type="button"
         onClick={handleAddToPlan}
@@ -95,7 +95,7 @@ const WorkoutActions = ({ workout }: WorkoutActionsProps) => {
         Add to today&apos;s plan
       </button>
 
-      {/* Save for Later */}
+    
       <button
         type="button"
         onClick={handleSaveForLater}

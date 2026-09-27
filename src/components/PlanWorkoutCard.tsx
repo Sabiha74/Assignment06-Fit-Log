@@ -25,7 +25,7 @@ const PlanWorkoutCard = ({
         isDone ? "opacity-60" : ""
       }`}
     >
-      {/* Image */}
+      
       <div className="relative h-[58px] w-[92px] shrink-0 overflow-hidden rounded-lg sm:h-[64px] sm:w-[100px]">
         <Image
           src={workout.image}
@@ -37,7 +37,7 @@ const PlanWorkoutCard = ({
         />
       </div>
 
-      {/* Workout information */}
+      
       <div className="min-w-0 flex-1">
         <h3
           className={`truncate text-xs font-extrabold uppercase ${
@@ -71,7 +71,6 @@ const PlanWorkoutCard = ({
         </div>
       </div>
 
-      {/* Actions */}
       <div className="flex shrink-0 items-center gap-2">
         <Link
           href={`/workout/${workout.id}`}

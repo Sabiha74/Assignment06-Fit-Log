@@ -20,19 +20,19 @@ const WorkoutDetails = ({ workout }: WorkoutDetailsProps) => {
         />
       </div>
 
-      {/* RIGHT SIDE - DETAILS */}
+     
       <div className="flex flex-col">
-        {/* Title */}
+        
         <h1 className="text-3xl font-extrabold uppercase tracking-tight text-white sm:text-4xl">
           {workout.name}
         </h1>
 
-        {/* Description */}
+        
         <p className="mt-2 max-w-2xl text-sm leading-6 text-[#8b919b]">
           {workout.description}
         </p>
 
-        {/* Muscle Groups */}
+        
         <div className="mt-3 flex flex-wrap gap-2">
           {workout.muscleGroups.map((muscle) => (
             <span
@@ -44,7 +44,7 @@ const WorkoutDetails = ({ workout }: WorkoutDetailsProps) => {
           ))}
         </div>
 
-        {/* Workout Information */}
+      
         <div className="mt-4 overflow-hidden rounded-xl border border-[#252a32] bg-[#15181e]">
           <InfoRow
             label="EQUIPMENT"
@@ -83,7 +83,7 @@ const WorkoutDetails = ({ workout }: WorkoutDetailsProps) => {
           />
         </div>
 
-        {/* Instructions */}
+      
         <div className="mt-5">
           <h2 className="text-sm font-extrabold uppercase text-white">
             INSTRUCTIONS
@@ -105,7 +105,7 @@ const WorkoutDetails = ({ workout }: WorkoutDetailsProps) => {
           </ol>
         </div>
 
-        {/* Buttons */}
+        
         <WorkoutActions workout={workout} />
       </div>
     </section>

@@ -24,9 +24,7 @@ const MyPlan = () => {
 
   const [loading, setLoading] = useState(true);
 
-  /* --------------------------------
-     LOAD DATA
-  -------------------------------- */
+ 
 
   const loadData = async () => {
     try {
@@ -97,10 +95,7 @@ const MyPlan = () => {
     };
   }, []);
 
-  /* --------------------------------
-     REMOVE FROM TODAY'S PLAN
-  -------------------------------- */
-
+    
   const handleRemoveFromPlan = (id: number) => {
     const storedPlan = localStorage.getItem("fitlog-plan");
 
@@ -126,9 +121,7 @@ const MyPlan = () => {
     window.dispatchEvent(new Event("fitlog-storage"));
   };
 
-  /* --------------------------------
-     REMOVE FROM SAVED
-  -------------------------------- */
+ 
 
   const handleRemoveSaved = (id: number) => {
     const storedSaved =
@@ -156,9 +149,7 @@ const MyPlan = () => {
     window.dispatchEvent(new Event("fitlog-storage"));
   };
 
-  /* --------------------------------
-     MARK AS DONE
-  -------------------------------- */
+ 
 
   const handleMarkDone = (id: number) => {
     const updatedCompleted = completedIds.includes(id)
@@ -175,9 +166,7 @@ const MyPlan = () => {
     toast.success("Workout marked as done.");
   };
 
-  /* --------------------------------
-     SORT
-  -------------------------------- */
+  
 
   const sortedWorkouts = useMemo(() => {
     const list =
@@ -220,9 +209,7 @@ const MyPlan = () => {
     sortBy,
   ]);
 
-  /* --------------------------------
-     STATISTICS
-  -------------------------------- */
+  
 
   const currentWorkouts =
   activeTab === "plan"
@@ -242,13 +229,11 @@ const calories = currentWorkouts.reduce(
     total + workout.caloriesBurned,
   0,
 );
-  /* --------------------------------
-     RENDER
-  -------------------------------- */
+ 
 
   return (
     <section className="mx-auto w-full max-w-[940px] px-4 py-10 sm:px-6">
-      {/* Header */}
+      
       <div>
         <h1 className="text-2xl font-extrabold uppercase tracking-tight text-white sm:text-3xl">
           My Plan
@@ -259,9 +244,9 @@ const calories = currentWorkouts.reduce(
         </p>
       </div>
 
-      {/* Statistics */}
+      
       <div className="mt-6 grid grid-cols-3 overflow-hidden rounded-xl border border-[#252a32] bg-[#111419]">
-        {/* Exercises */}
+        
         <div className="px-4 py-5 sm:px-5">
           <p className="text-[9px] text-[#666c76]">
             Exercises
@@ -272,7 +257,7 @@ const calories = currentWorkouts.reduce(
           </p>
         </div>
 
-        {/* Minutes */}
+       
         <div className="border-l border-[#252a32] px-4 py-5 sm:px-5">
           <p className="text-[9px] text-[#666c76]">
             Minutes
@@ -283,7 +268,7 @@ const calories = currentWorkouts.reduce(
           </p>
         </div>
 
-        {/* Calories */}
+        
         <div className="border-l border-[#252a32] px-4 py-5 sm:px-5">
           <p className="text-[9px] text-[#666c76]">
             Calories
@@ -295,9 +280,9 @@ const calories = currentWorkouts.reduce(
         </div>
       </div>
 
-      {/* Tabs + Sort */}
+     
       <div className="mt-5 flex items-center justify-between gap-4">
-        {/* Tabs */}
+        
         <div className="flex rounded-lg border border-[#252a32] bg-[#111419] p-1">
           <button
             type="button"
@@ -324,7 +309,7 @@ const calories = currentWorkouts.reduce(
           </button>
         </div>
 
-        {/* Sort */}
+       
         <div className="flex items-center gap-2">
           <span className="hidden text-[9px] text-[#666c76] sm:block">
             Sort By
@@ -354,7 +339,7 @@ const calories = currentWorkouts.reduce(
         </div>
       </div>
 
-      {/* Workout List */}
+      
       <div className="mt-4 space-y-2.5">
         {loading ? (
           <div className="rounded-xl border border-[#252a32] bg-[#15181e] px-4 py-8 text-center text-xs text-[#666c76]">
