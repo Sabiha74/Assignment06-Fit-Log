@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { IWorkout } from "@/types/workout";
 import PlanWorkoutCard from "./PlanWorkoutCard";
+import Link from "next/link";
 
 const API_URL =
   "https://api.api-store.workers.dev/api/fitlog";
@@ -343,19 +344,25 @@ const calories = currentWorkouts.reduce(
             Loading workouts...
           </div>
         ) : sortedWorkouts.length === 0 ? (
-          <div className="rounded-xl border border-[#252a32] bg-[#15181e] px-4 py-10 text-center">
-            <p className="text-sm font-semibold text-white">
-              {activeTab === "plan"
-                ? "No workouts in today's plan."
-                : "No saved workouts yet."}
-            </p>
+  <div className="rounded-xl border border-[#252a32] bg-[#15181e] px-4 py-10 text-center">
+    <p className="text-sm font-extrabold uppercase text-white">
+      NOTHING HERE YET
+    </p>
 
-            <p className="mt-1 text-xs text-[#666c76]">
-              {activeTab === "plan"
-                ? "Add a workout from its details page."
-                : "Save workouts to find them here later."}
-            </p>
-          </div>
+    <p className="mt-1 text-xs text-[#666c76]">
+      Browse the library and add a lift to get today moving.
+    </p>
+
+    {activeTab === "plan" && (
+      <Link
+        href="/"
+        className="mt-5 inline-flex rounded-md bg-[#ccff00] px-4 py-2.5 text-xs font-bold text-black transition hover:bg-[#b8e600]"
+      >
+        Go to workouts
+      </Link>
+    )}
+  </div>
+
         ) : (
           sortedWorkouts.map((workout) => (
             <PlanWorkoutCard
